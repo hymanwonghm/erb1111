@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <script>
+      const socket = io("http://localhost:3000");
+
+      //Task: When the server emits 'chat message' , show message in  messages element
+      // Write your code here
+      const form = document.getElementById('form')
+      const input = document.getElementById("input")
+      
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit('chat message', input.value);
+          input.value = '';
+        }
+      });
+      
+      let messages = []
+
+      socket.on("chat message", message => {
+        messages.push(document.getElementById("message"));
+      });
+      
+
+      //Task: Send a message
+      // Write your code here
+
+    </script>
+  </body>
+</html>
